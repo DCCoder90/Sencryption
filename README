@@ -1,0 +1,56 @@
+The sencryption class is a PHP class used to create secure methods of encryption,
+decryption, and hashing.  The class is currently version 0.1 which means it may
+still be a little buggy and be a little slow.
+
+Example:
+<?php
+include("senc.class.php");
+
+$key="mykey";
+$data="This is my secure string to be encrypted!";
+
+$enc=new sencryption($key);
+$enc->load_ciphers();
+
+$encrypted=$enc->sencrypt($data);
+$decrypted=$enc->sdecrypt($data);
+
+echo "Encrypted Data: ".$encrypted."<br>";
+echo "Decrypted Data: ".$decrypted;
+?>
+
+Explanation:
+Within the class there are only 4 useful functions which are described more in detail below.
+
+sencryption::load_ciphers($loc="");
+
+The load_ciphers function must be called whenever you are going to perform
+any type of encryption or decryption.  This function populates the ciphers array
+within the class with the needed encryption ciphers.
+
+The $loc variable here is in fact optional (you can leave it blank), or you may
+use it to specify the mcrypt library directory within your server or you can use
+it to specify a .txt file to read the cipher's from.
+
+NOTE: I would highly recommend loading the cipher's from a .txt file as if you
+obtain them from the server or from your mcrypt library's directory they may
+change when PHP or the mcrypt library is updated.
+
+Also, the positions of the ciphers within the array MUST remain the same if you
+wish to be able to correctly decrypt your data.
+
+sencryption::sencrypt($data);
+
+This function performs the actual encryption of data. Simply pass data along to
+it and it will return the data encrypted.
+
+sencryption::sdecrypt($data);
+
+This function performs the decryption of data.  Pass the encrypted data to this
+function and it will return the plain text.
+
+sencryption::shash($data,$salt=NULL);
+
+This is the hashing function of the class and will securely hash data that is
+passed to it.  The $salt variable is optional, although it is reccommended if
+you are using the class simply for encryption.
