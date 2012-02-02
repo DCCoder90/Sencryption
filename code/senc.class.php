@@ -6,7 +6,7 @@
  * @package Sencryption Class
  * @author Ernest
  * @copyright Copyright (c) 2011
- * @version 0.1
+ * @version 0.1.1
  * @access public
  */
 class sencryption{
@@ -14,7 +14,7 @@ class sencryption{
 	 * Encryption/Decryption Settings
 	 *
 	 */
-	private $key;
+	public $key;
 	private $key_size;
 	private $ciphers;
 	private $set_cipher;
@@ -92,7 +92,7 @@ class sencryption{
 	 * * Loads list of ciphers from the library or from a txt file *
 	 * @return NULL
 	 */
-	public function load_ciphers($loc=""){
+	public function load_ciphers($loc=null){
 		if(substr($loc,-4,4)==".txt"){
 			if($fh=fopen($loc,r)){
 				while($line=fgets($fh)){
@@ -104,7 +104,7 @@ class sencryption{
 				die("Error reading ciphers!");
 			}
 		}else{
-			if($loc==""||$loc==NULL){
+			if($loc==""||$loc==null){
 				$loc=ini_get("mcrypt.algorithms_dir");
 			}
 			$this->lib_dir=$loc;

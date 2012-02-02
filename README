@@ -6,10 +6,12 @@ Example:
 <?php
 include("senc.class.php");
 
-$key="mykey";
 $data="This is my secure string to be encrypted!";
 
 $enc=new sencryption($key);
+
+$enc->key="mykey";
+
 $enc->load_ciphers();
 
 $encrypted=$enc->sencrypt($data);
